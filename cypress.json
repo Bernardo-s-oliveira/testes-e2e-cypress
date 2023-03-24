@@ -1,3 +1,5 @@
 {
-    "baseUrl": "https://notes-serverless-app.com"
+    "baseUrl": "https://notes-serverless-app.com",
+    "experimentalSessionSupport": true,
+    "defaultCommandTimeout ": 10000
 }

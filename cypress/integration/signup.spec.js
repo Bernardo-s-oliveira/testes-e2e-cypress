@@ -5,11 +5,7 @@ it('successfully signs up using confirmation code sent via email', () => {
   
     cy.intercept('GET', '**/notes').as('getNotes')
     cy.visit('/signup')
-    cy.get('#email').type(emailAddress)
-    cy.get('#password').type(password, { log: false })
-    cy.get('#confirmPassword').type(password, { log: false })
-    cy.contains('button', 'Signup').click()
-    cy.get('#confirmationCode').should('be.visible')
+    cy.fillSignupFormAndSubmit(emailAddress, password)
   
     cy.mailosaurGetMessage(Cypress.env('MAILOSAUR_SERVER_ID'), {
       sentTo: emailAddress
@@ -17,7 +13,7 @@ it('successfully signs up using confirmation code sent via email', () => {
       const confirmationCode = message.html.body.match(/\d{6}/)[0]
       cy.get('#confirmationCode').type(`${confirmationCode}{enter}`)
   
-      cy.wait('@getNotes', {timeout: 15000});
+      cy.wait('@getNotes', {timeout: 10000})
       cy.contains('h1', 'Your Notes').should('be.visible')
     })
   })
