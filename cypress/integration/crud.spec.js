@@ -6,8 +6,8 @@ it('CRUDs a note', () => {
     cy.intercept('GET', '**/notes/**').as('getNote')
     cy.login()
     cy.visit('/notes/new')
-    // cy.get('#content').type(noteDescription)
-    // cy.contains('button', 'Create').click()
+    cy.get('#content').type(noteDescription)
+    cy.contains('button', 'Create').click()
   
     // cy.wait('@getNotes')
     // cy.contains('.list-group-item', noteDescription)
