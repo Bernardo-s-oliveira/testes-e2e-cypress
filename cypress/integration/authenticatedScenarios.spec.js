@@ -23,7 +23,7 @@ describe('Scenarios where authentication is a pre-requirement', () => {
     cy.wait('@getNotes')
   })
 
-  it.only('successfully submits the form', () => {
+  it('successfully submits the form', () => {
     cy.intercept('POST', '**/prod/billing').as('paymentRequest')
 
     cy.fillSettingsFormAndSubmit()
@@ -32,5 +32,19 @@ describe('Scenarios where authentication is a pre-requirement', () => {
     cy.wait('@paymentRequest').then(response => {
       expect(response.state).to.equal('Complete')
     })
+  })
+
+  it('logs out', () => {
+    cy.visit('/')
+    cy.wait('@getNotes')
+    if (Cypress.config('viewportWidth') < Cypress.env('viewportWidthBreakpoint')) {
+      cy.get('.navbar-toggle.collapsed')
+        .should('be.visible')
+        .click()
+    }
+    /* ==== Generated with Cypress Studio ==== */
+    cy.get('.nav > :nth-child(2) > a').click()
+    cy.get('#email').should('be.visible')
+    /* ==== End Cypress Studio ==== */
   })
 })
