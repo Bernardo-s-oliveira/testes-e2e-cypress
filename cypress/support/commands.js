@@ -25,7 +25,6 @@ Cypress.Commands.add('login', (
   } else {
     login()
   }
-
 })
 
 const attachFileHandler = () => cy.get('#file').attachFile('example.json')
@@ -69,10 +68,6 @@ Cypress.Commands.add('deleteNote', note => {
 
   cy.contains('.list-group-item', note).should('not.exist')
 })
-
-// cypress/support/commands.js
-
-// Outros comandos aqui ...
 
 Cypress.Commands.add('fillSettingsFormAndSubmit', () => {
   cy.visit('/settings')
