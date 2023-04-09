@@ -8,8 +8,8 @@ Cypress.Commands.add('fillSignupFormAndSubmit', (email, password) => {
 })
 
 Cypress.Commands.add('login', (
-  username = Cypress.env('CYPRESS_USER_EMAIL'),
-  password = Cypress.env('CYPRESS_USER_PASSWORD'),
+  username = Cypress.env('USER_EMAIL'),
+  password = Cypress.env('USER_PASSWORD'),
   { cacheSession = true } = {}
 ) => {
   const login = () => {
